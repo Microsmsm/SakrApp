@@ -1,3 +1,11 @@
+import { QrScannerPage } from './../pages/qr-scanner/qr-scanner';
+import { DownloadIdPage } from './../pages/download-id/download-id';
+import { PaymentRequestPage } from './../pages/payment-request/payment-request';
+import { WalletPage } from './../pages/wallet/wallet';
+import { QuestionsPage } from './../pages/questions/questions';
+import { HomePage } from './../pages/home/home';
+import { TermsPage } from './../pages/terms/terms';
+import { WelcomePage } from './../pages/welcome/welcome';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
 import { NgModule, ErrorHandler } from '@angular/core';
@@ -16,12 +24,7 @@ import { PopoverPage } from '../pages/about-popover/about-popover';
 import { AccountPage } from '../pages/account/account';
 import { LoginPage } from '../pages/login/login';
 import { MapPage } from '../pages/map/map';
-import { SchedulePage } from '../pages/schedule/schedule';
-import { ScheduleFilterPage } from '../pages/schedule-filter/schedule-filter';
-import { SessionDetailPage } from '../pages/session-detail/session-detail';
 import { SignupPage } from '../pages/signup/signup';
-import { SpeakerDetailPage } from '../pages/speaker-detail/speaker-detail';
-import { SpeakerListPage } from '../pages/speaker-list/speaker-list';
 import { TabsPage } from '../pages/tabs-page/tabs-page';
 import { TutorialPage } from '../pages/tutorial/tutorial';
 import { SupportPage } from '../pages/support/support';
@@ -29,24 +32,31 @@ import { SupportPage } from '../pages/support/support';
 import { ConferenceData } from '../providers/conference-data';
 import { UserData } from '../providers/user-data';
 
+import { QRCodeModule } from 'angularx-qrcode';
+
+import { QRScanner } from '@ionic-native/qr-scanner';
+
 
 @NgModule({
   declarations: [
     ConferenceApp,
+    WelcomePage,
+    HomePage,
+    QuestionsPage,
+    WalletPage,
+    PaymentRequestPage,
+    DownloadIdPage,
+    QrScannerPage,
     AboutPage,
     AccountPage,
     LoginPage,
     MapPage,
     PopoverPage,
-    SchedulePage,
-    ScheduleFilterPage,
-    SessionDetailPage,
     SignupPage,
-    SpeakerDetailPage,
-    SpeakerListPage,
     TabsPage,
     TutorialPage,
-    SupportPage
+    SupportPage,
+    TermsPage
   ],
   imports: [
     BrowserModule,
@@ -54,46 +64,49 @@ import { UserData } from '../providers/user-data';
     IonicModule.forRoot(ConferenceApp, {}, {
       links: [
         { component: TabsPage, name: 'TabsPage', segment: 'tabs-page' },
-        { component: SchedulePage, name: 'Schedule', segment: 'schedule' },
-        { component: SessionDetailPage, name: 'SessionDetail', segment: 'sessionDetail/:sessionId' },
-        { component: ScheduleFilterPage, name: 'ScheduleFilter', segment: 'scheduleFilter' },
-        { component: SpeakerListPage, name: 'SpeakerList', segment: 'speakerList' },
-        { component: SpeakerDetailPage, name: 'SpeakerDetail', segment: 'speakerDetail/:speakerId' },
-        { component: MapPage, name: 'Map', segment: 'map' },
+        { component: QuestionsPage, name: 'Questions', segment: 'questions' },
         { component: AboutPage, name: 'About', segment: 'about' },
         { component: TutorialPage, name: 'Tutorial', segment: 'tutorial' },
         { component: SupportPage, name: 'SupportPage', segment: 'support' },
+        { component: QrScannerPage, name: 'Qr Scanner', segment: 'qr-scanner' },
         { component: LoginPage, name: 'LoginPage', segment: 'login' },
         { component: AccountPage, name: 'AccountPage', segment: 'account' },
-        { component: SignupPage, name: 'SignupPage', segment: 'signup' }
-      ]
+        { component: SignupPage, name: 'SignupPage', segment: 'signup' },
+        { component: WelcomePage, name: 'Welcome', segment: 'welcome' },
+        { component: HomePage, name: 'Home', segment: 'home' },
+      ],
     }),
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    QRCodeModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     ConferenceApp,
+    WelcomePage,
+    HomePage,
+    QuestionsPage,
+    WalletPage,
+    PaymentRequestPage,
+    DownloadIdPage,
+    QrScannerPage,
     AboutPage,
     AccountPage,
     LoginPage,
     MapPage,
     PopoverPage,
-    SchedulePage,
-    ScheduleFilterPage,
-    SessionDetailPage,
     SignupPage,
-    SpeakerDetailPage,
-    SpeakerListPage,
     TabsPage,
     TutorialPage,
-    SupportPage
+    SupportPage,
+    TermsPage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     ConferenceData,
     UserData,
     InAppBrowser,
-    SplashScreen
+    SplashScreen,
+    QRScanner
   ]
 })
 export class AppModule { }

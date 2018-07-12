@@ -1,3 +1,10 @@
+import { WelcomePage } from './../pages/welcome/welcome';
+import { QrScannerPage } from './../pages/qr-scanner/qr-scanner';
+import { DownloadIdPage } from './../pages/download-id/download-id';
+import { PaymentRequestPage } from './../pages/payment-request/payment-request';
+import { WalletPage } from './../pages/wallet/wallet';
+import { QuestionsPage } from './../pages/questions/questions';
+import { HomePage } from './../pages/home/home';
 import { Component, ViewChild } from '@angular/core';
 
 import { Events, MenuController, Nav, Platform } from 'ionic-angular';
@@ -5,15 +12,11 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { Storage } from '@ionic/storage';
 
-import { AboutPage } from '../pages/about/about';
 import { AccountPage } from '../pages/account/account';
 import { LoginPage } from '../pages/login/login';
-import { MapPage } from '../pages/map/map';
 import { SignupPage } from '../pages/signup/signup';
 import { TabsPage } from '../pages/tabs-page/tabs-page';
 import { TutorialPage } from '../pages/tutorial/tutorial';
-import { SchedulePage } from '../pages/schedule/schedule';
-import { SpeakerListPage } from '../pages/speaker-list/speaker-list';
 import { SupportPage } from '../pages/support/support';
 
 import { ConferenceData } from '../providers/conference-data';
@@ -42,10 +45,11 @@ export class ConferenceApp {
   // the left menu only works after login
   // the login page disables the left menu
   appPages: PageInterface[] = [
-    { title: 'Schedule', name: 'TabsPage', component: TabsPage, tabComponent: SchedulePage, index: 0, icon: 'calendar' },
-    { title: 'Speakers', name: 'TabsPage', component: TabsPage, tabComponent: SpeakerListPage, index: 1, icon: 'contacts' },
-    { title: 'Map', name: 'TabsPage', component: TabsPage, tabComponent: MapPage, index: 2, icon: 'map' },
-    { title: 'About', name: 'TabsPage', component: TabsPage, tabComponent: AboutPage, index: 3, icon: 'information-circle' }
+    { title: 'Questions', name: 'TabsPage', component: TabsPage, tabComponent: QuestionsPage, index: 0, icon: 'done-all' },
+    { title: 'Wallet', name: 'TabsPage', component: TabsPage, tabComponent: WalletPage, index: 1, icon: 'card' },
+    { title: 'Payment Request', name: 'TabsPage', component: TabsPage, tabComponent: PaymentRequestPage, index: 2, icon: 'logo-usd' },
+    { title: 'Download ID', name: 'TabsPage', component: TabsPage, tabComponent: DownloadIdPage, index: 3, icon: 'cloud-download' },
+
   ];
   loggedInPages: PageInterface[] = [
     { title: 'Account', name: 'AccountPage', component: AccountPage, icon: 'person' },
@@ -73,25 +77,34 @@ export class ConferenceApp {
     this.storage.get('hasSeenTutorial')
       .then((hasSeenTutorial) => {
         if (hasSeenTutorial) {
-          this.rootPage = TabsPage;
+          this.rootPage = WelcomePage;
         } else {
-          this.rootPage = TutorialPage;
+          this.rootPage = WelcomePage;
         }
         this.platformReady()
       });
 
     // load the conference data
     confData.load();
-
+/*
     // decide which menu items should be hidden by current login status stored in local storage
     this.userData.hasLoggedIn().then((hasLoggedIn) => {
-      this.enableMenu(hasLoggedIn === true);
+      console.log(hasLoggedIn);
+      //this.enableMenu(hasLoggedIn === true);
     });
-    this.enableMenu(true);
-
-    this.listenToLoginEvents();
+    //this.enableMenu(true);
+*/
+    //this.listenToLoginEvents();
+    console.log('====================================');
+    console.log(HomePage,WelcomePage);
+    console.log('====================================');
   }
-
+  goQRScanner() {
+    this.nav.push(QrScannerPage)
+  }
+  goHomePage() {
+    this.nav.push(HomePage)
+  }
   openPage(page: PageInterface) {
     let params = {};
 
