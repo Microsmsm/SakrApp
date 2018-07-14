@@ -38,6 +38,7 @@ import { QRCodeModule } from 'angularx-qrcode';
 import { QRScanner } from '@ionic-native/qr-scanner';
 import { PaymentsDataProvider } from '../providers/payments-data/payments-data';
 import { QuestionsDataProvider } from '../providers/questions-data/questions-data';
+import { WalletsDataProvider } from '../providers/wallets-data/wallets-data';
 
 
 @NgModule({
@@ -113,6 +114,7 @@ import { QuestionsDataProvider } from '../providers/questions-data/questions-dat
     QRScanner,
     PaymentsDataProvider,
     QuestionsDataProvider,
+    WalletsDataProvider,
   ]
 })
 export class AppModule { }
