@@ -1,3 +1,4 @@
+import { TabsPage } from './../tabs-page/tabs-page';
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { SignupPage } from '../signup/signup';
@@ -17,6 +18,9 @@ export class WelcomePage {
 
   goSignupPage() {
     this.navCtrl.push(SignupPage);
+  }
+  goTabsPage() {
+    this.navCtrl.push(TabsPage)
   }
 
 }

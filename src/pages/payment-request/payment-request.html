@@ -19,7 +19,7 @@
 <ion-content padding>
 
   <h1 text-center>You have a new Payment</h1>
-  <ion-list>
+  <ion-card *ngFor="let payment of payments">
 
     <ion-item>
       <span color="primary">Payment ID:</span>
@@ -41,10 +41,13 @@
       <span color="primary">Notes:</span>
       <span>{{payment?.notes}}</span>
     </ion-item>
-  </ion-list>
+    <div text-end>
+      <button ion-button color="primary"> Accept Payment
+        <ion-icon class="margin-icon" name="log-in"></ion-icon>
+      </button>
+    </div>
+  </ion-card>
 
-  <div text-center>
-    <button ion-button color="primary"> Accept Payment</button>
-  </div>
+
 
 </ion-content>

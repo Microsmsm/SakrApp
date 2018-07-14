@@ -21,7 +21,7 @@
     <h1 text-center>Please choose to login or sign up</h1>
     <ion-row responsive-sm>
         <ion-col>
-          <button ion-button type="submit" block>Login</button>
+          <button ion-button (click)="goTabsPage()" block>Login</button>
         </ion-col>
         <ion-col>
           <button ion-button (click)="goSignupPage()" color="light" block>Signup</button>

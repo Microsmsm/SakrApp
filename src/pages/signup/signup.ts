@@ -19,7 +19,7 @@ import { TabsPage } from '../tabs-page/tabs-page';
 })
 export class SignupPage {
   didAgree: boolean = false;
-  signup: UserOptions = { username: '', dob: new Date(), password: '' };
+  signup: UserOptions = { surname: '', dob: '', password: '' };
   submitted = false;
 
   constructor(public navCtrl: NavController, public userData: UserData, public modalCtrl: ModalController, public viewCtrl: ViewController) {}
@@ -32,8 +32,14 @@ export class SignupPage {
     this.submitted = true;
 
     if (form.valid) {
-      this.userData.signup(this.signup.username);
-      this.navCtrl.push(TabsPage);
+      console.log('form is valid... signing in');
+      this.userData.signup(this.signup.surname, this.signup.dob, this.signup.password).subscribe(res => {
+        console.log(res);
+        this.navCtrl.push(TabsPage);
+      }, err => {
+        console.log(err);
+      //  this.navCtrl.push(TabsPage);
+      })
     }
   }
   presentModal() {

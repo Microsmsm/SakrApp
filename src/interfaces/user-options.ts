@@ -1,6 +1,6 @@
 
 export interface UserOptions {
-  username: string,
-  dob: Date,
+  surname: string,
+  dob: string,
   password: string
 }

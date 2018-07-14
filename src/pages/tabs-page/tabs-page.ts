@@ -1,3 +1,4 @@
+import { HomePage } from './../home/home';
 import { DownloadIdPage } from './../download-id/download-id';
 import { PaymentRequestPage } from './../payment-request/payment-request';
 import { WalletPage } from './../wallet/wallet';
@@ -12,10 +13,11 @@ import { NavParams } from 'ionic-angular';
 })
 export class TabsPage {
   // set the root pages for each tab
-  tab1Root: any = QuestionsPage;
-  tab2Root: any = WalletPage;
-  tab3Root: any = PaymentRequestPage;
-  tab4Root: any = DownloadIdPage;
+  tab1Root: any = HomePage;
+  tab2Root: any = QuestionsPage;
+  tab3Root: any = WalletPage;
+  tab4Root: any = PaymentRequestPage;
+  tab5Root: any = DownloadIdPage;
   mySelectedIndex: number;
 
   constructor(navParams: NavParams) {

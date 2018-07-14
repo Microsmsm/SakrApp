@@ -15,10 +15,6 @@
         <ion-list-header>
           Navigate
         </ion-list-header>
-        <button ion-item menuClose (click)="goHomePage()">
-            <ion-icon item-start name="home"></ion-icon>
-            Home Page
-          </button>
         <button ion-item menuClose *ngFor="let p of appPages" (click)="openPage(p)">
           <ion-icon item-start [name]="p.icon" [color]="isActive(p)"></ion-icon>
           {{p.title}}

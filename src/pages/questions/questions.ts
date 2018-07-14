@@ -1,3 +1,4 @@
+import { QuestionsDataProvider } from './../../providers/questions-data/questions-data';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
@@ -7,34 +8,41 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-
+export interface IQuestion {
+  id: string,
+  title: string,
+  answer?:boolean
+}
 @IonicPage()
 @Component({
   selector: 'page-questions',
   templateUrl: 'questions.html',
 })
 export class QuestionsPage {
-  fruit: any = {
-    apples: false,
-    bananas: false,
-    tomatos: false,
-    grapes: false
-  };
-  question: any ={
-    questionId: 1,
-    answer: false,
-    userId:1
-  }
+  // fruit: any = {
+  //   apples: false,
+  //   bananas: false,
+  //   tomatos: false,
+  //   grapes: false
+  // };
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  questions: IQuestion[] = [];
+  constructor(public navCtrl: NavController, public navParams: NavParams,public questionsProvider:QuestionsDataProvider) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad QuestionsPage');
-    console.log();
+    this.showQuestions()
+    console.log(1111);
   }
   updateChoise() {
-    console.log(this.fruit);
+    console.log(this.questions);
+  }
+  showQuestions() {
+    this.questionsProvider.getQuestions().subscribe((result: IQuestion[]) => {
+      console.log(result);
+      this.questions = result
+    })
   }
 
 

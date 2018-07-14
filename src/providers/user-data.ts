@@ -1,7 +1,12 @@
+
+import { API } from './../app/globals';
 import { Injectable } from '@angular/core';
 
 import { Events } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
+import { HttpClient } from "@angular/common/http";
+import { Observable } from '../../node_modules/rxjs/Observable';
+
 
 
 @Injectable()
@@ -9,10 +14,12 @@ export class UserData {
   _favorites: string[] = [];
   HAS_LOGGED_IN = 'hasLoggedIn';
   HAS_SEEN_TUTORIAL = 'hasSeenTutorial';
+  accountAPI = API.Account
 
   constructor(
     public events: Events,
-    public storage: Storage
+    public storage: Storage,
+    public http: HttpClient
   ) {}
 
   hasFavorite(sessionName: string): boolean {
@@ -36,11 +43,19 @@ export class UserData {
     this.events.publish('user:login');
   };
 
-  signup(username: string): void {
-    this.storage.set(this.HAS_LOGGED_IN, true);
-    this.setUsername(username);
-    this.events.publish('user:signup');
+  signup(surname: string, dateOfBirth:string, password:string): Observable<any> {
+    let body = {
+      "surname":surname,
+      "dateOfBirth":dateOfBirth,
+      "password":password
+    }
+    return this.http.post(this.accountAPI, body, {responseType: 'text'})
   };
+  didSignup(){
+    this.storage.set(this.HAS_LOGGED_IN, true);
+    this.setUsername('smsm');//change it to username
+    this.events.publish('user:signup');
+  }
 
   logout(): void {
     this.storage.remove(this.HAS_LOGGED_IN);

@@ -1,3 +1,4 @@
+import { HttpClientModule } from '@angular/common/http';
 import { QrScannerPage } from './../pages/qr-scanner/qr-scanner';
 import { DownloadIdPage } from './../pages/download-id/download-id';
 import { PaymentRequestPage } from './../pages/payment-request/payment-request';
@@ -35,6 +36,8 @@ import { UserData } from '../providers/user-data';
 import { QRCodeModule } from 'angularx-qrcode';
 
 import { QRScanner } from '@ionic-native/qr-scanner';
+import { PaymentsDataProvider } from '../providers/payments-data/payments-data';
+import { QuestionsDataProvider } from '../providers/questions-data/questions-data';
 
 
 @NgModule({
@@ -61,6 +64,7 @@ import { QRScanner } from '@ionic-native/qr-scanner';
   imports: [
     BrowserModule,
     HttpModule,
+    HttpClientModule,
     IonicModule.forRoot(ConferenceApp, {}, {
       links: [
         { component: TabsPage, name: 'TabsPage', segment: 'tabs-page' },
@@ -106,7 +110,9 @@ import { QRScanner } from '@ionic-native/qr-scanner';
     UserData,
     InAppBrowser,
     SplashScreen,
-    QRScanner
+    QRScanner,
+    PaymentsDataProvider,
+    QuestionsDataProvider,
   ]
 })
 export class AppModule { }
