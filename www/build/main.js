@@ -154,10 +154,9 @@ var WalletPage = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["m" /* Component */])({
             selector: 'page-wallet',template:/*ion-inline-start:"/Users/osama/Documents/GitHub/SakrApp/src/pages/wallet/wallet.html"*/'<!--\n  Generated template for the WalletPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n      <button ion-button menuToggle>\n          <ion-icon name="menu"></ion-icon>\n        </button>\n    <ion-title>wallet</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n\n  <h1 text-center>\nYour balance: <span ion-text color="green">${{balance}} USD</span>\n  </h1>\n  <br>\n  <h1>Transaction History:</h1>\n  <ion-list>\n      <ion-item *ngFor="let transaction of transactions">\n        <span color="primary">{{transaction.to}}</span> <span>{{transaction.timeStamp}}</span>\n      </ion-item>\n    </ion-list>\n\n</ion-content>\n'/*ion-inline-end:"/Users/osama/Documents/GitHub/SakrApp/src/pages/wallet/wallet.html"*/,
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["j" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["j" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["k" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["k" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_0__providers_wallets_data_wallets_data__["a" /* WalletsDataProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__providers_wallets_data_wallets_data__["a" /* WalletsDataProvider */]) === "function" && _c || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["j" /* NavController */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["k" /* NavParams */], __WEBPACK_IMPORTED_MODULE_0__providers_wallets_data_wallets_data__["a" /* WalletsDataProvider */]])
     ], WalletPage);
     return WalletPage;
-    var _a, _b, _c;
 }());
 
 //# sourceMappingURL=wallet.js.map
@@ -212,13 +211,31 @@ var QuestionsPage = (function () {
             _this.questions = result;
         });
     };
+    QuestionsPage.prototype.submitAnswers = function () {
+        console.log('submiting answers');
+        //best if you pass this.questions as is and modify backend or use this parsing technique
+        var answers = [];
+        for (var _i = 0, _a = this.questions; _i < _a.length; _i++) {
+            var question = _a[_i];
+            answers.push({
+                questionId: question.id,
+                questionAnswer: question.answer
+            });
+        }
+        this.questionsProvider.postAnswers(answers).subscribe(function (res) {
+            console.log(res);
+        }, function (err) {
+            console.log(err);
+        });
+    };
     QuestionsPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["m" /* Component */])({
-            selector: 'page-questions',template:/*ion-inline-start:"/Users/osama/Documents/GitHub/SakrApp/src/pages/questions/questions.html"*/'<!--\n  Generated template for the QuestionsPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>questions</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n\n  <h1>Hello, you\'re in the Questions Page</h1>\n  <br>\n  <h3>Questions:</h3>\n  <ion-list>\n    <ion-item *ngFor="let question of questions;let index = index;">\n      <ion-label>{{question.title}}</ion-label>\n      <ion-checkbox [(ngModel)]="question[\'answer\']" (ionChange)="updateChoise()" item-end color="dark" checked="true"></ion-checkbox>\n    </ion-item>\n  </ion-list>\n\n  <div text-right>\n\n    <button ion-button color="primary">\n\n      Submit\n      <ion-icon name="paper-plane"></ion-icon>\n    </button>\n\n  </div>\n</ion-content>\n'/*ion-inline-end:"/Users/osama/Documents/GitHub/SakrApp/src/pages/questions/questions.html"*/,
+            selector: 'page-questions',template:/*ion-inline-start:"/Users/osama/Documents/GitHub/SakrApp/src/pages/questions/questions.html"*/'<!--\n  Generated template for the QuestionsPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>questions</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n\n  <h1>Hello, you\'re in the Questions Page</h1>\n  <br>\n  <h3>Questions:</h3>\n  <ion-list>\n    <ion-item *ngFor="let question of questions;let index = index;">\n      <ion-label>{{question.title}}</ion-label>\n      <ion-checkbox [(ngModel)]="question[\'answer\']" (ionChange)="updateChoise()" item-end color="dark" checked="true"></ion-checkbox>\n    </ion-item>\n  </ion-list>\n\n  <div text-right>\n\n    <button (click)="submitAnswers()" ion-button color="primary">\n\n      Submit\n      <ion-icon name="paper-plane"></ion-icon>\n    </button>\n\n  </div>\n</ion-content>\n'/*ion-inline-end:"/Users/osama/Documents/GitHub/SakrApp/src/pages/questions/questions.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["j" /* NavController */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["k" /* NavParams */], __WEBPACK_IMPORTED_MODULE_0__providers_questions_data_questions_data__["a" /* QuestionsDataProvider */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["j" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["j" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["k" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["k" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_0__providers_questions_data_questions_data__["a" /* QuestionsDataProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__providers_questions_data_questions_data__["a" /* QuestionsDataProvider */]) === "function" && _c || Object])
     ], QuestionsPage);
     return QuestionsPage;
+    var _a, _b, _c;
 }());
 
 //# sourceMappingURL=questions.js.map
@@ -681,16 +698,25 @@ var QuestionsDataProvider = (function () {
     function QuestionsDataProvider(http) {
         this.http = http;
         this.questions = __WEBPACK_IMPORTED_MODULE_2__app_globals__["a" /* API */].Questions;
+        this.answers = __WEBPACK_IMPORTED_MODULE_2__app_globals__["a" /* API */].Answers;
+        this.userPublicKey = 1;
         console.log('Hello QuestionsDataProvider Provider');
     }
     QuestionsDataProvider.prototype.getQuestions = function () {
         return this.http.get(this.questions);
     };
+    QuestionsDataProvider.prototype.postAnswers = function (answers) {
+        return this.http.post(this.answers, {
+            userPublicKey: this.userPublicKey,
+            answers: answers
+        }, { responseType: 'text' }); //use json will be better with angular httpClient as it auto read res as json if text will case errors
+    };
     QuestionsDataProvider = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_0__angular_common_http__["a" /* HttpClient */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["a" /* HttpClient */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["a" /* HttpClient */]) === "function" && _a || Object])
     ], QuestionsDataProvider);
     return QuestionsDataProvider;
+    var _a;
 }());
 
 //# sourceMappingURL=questions-data.js.map
@@ -1731,7 +1757,7 @@ var UserData = (function () {
             "dateOfBirth": dateOfBirth,
             "password": password
         };
-        return this.http.post(this.accountAPI, body, { responseType: 'text' });
+        return this.http.post(this.accountAPI, body, { responseType: 'text' }); //use json will be better with angular
     };
     ;
     UserData.prototype.didSignup = function () {
@@ -1769,11 +1795,10 @@ var UserData = (function () {
     ;
     UserData = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["c" /* Events */],
-            __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */],
-            __WEBPACK_IMPORTED_MODULE_4__angular_common_http__["a" /* HttpClient */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["c" /* Events */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["c" /* Events */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_4__angular_common_http__["a" /* HttpClient */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__angular_common_http__["a" /* HttpClient */]) === "function" && _c || Object])
     ], UserData);
     return UserData;
+    var _a, _b, _c;
 }());
 
 //# sourceMappingURL=user-data.js.map
@@ -1792,6 +1817,7 @@ var API = {
     Questions: SITE_URL + "/api/Questions",
     WalletsTransactions: SITE_URL + "/api/Wallets/transactions",
     Wallets: SITE_URL + "/api/Wallets",
+    Answers: SITE_URL + "/api/Questions/api/Questions/Answers"
 };
 //# sourceMappingURL=globals.js.map
 

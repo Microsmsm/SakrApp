@@ -49,7 +49,7 @@ export class UserData {
       "dateOfBirth":dateOfBirth,
       "password":password
     }
-    return this.http.post(this.accountAPI, body, {responseType: 'text'})
+    return this.http.post(this.accountAPI, body, {responseType: 'text'})//use json will be better with angular
   };
   didSignup(){
     this.storage.set(this.HAS_LOGGED_IN, true);

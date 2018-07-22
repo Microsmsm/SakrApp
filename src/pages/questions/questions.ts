@@ -35,15 +35,32 @@ export class QuestionsPage {
     this.showQuestions()
     console.log(1111);
   }
+
   updateChoise() {
     console.log(this.questions);
   }
+
   showQuestions() {
     this.questionsProvider.getQuestions().subscribe((result: IQuestion[]) => {
       console.log(result);
       this.questions = result
     })
   }
-
+  submitAnswers() {
+    console.log('submiting answers');
+    //best if you pass this.questions as is and modify backend or use this parsing technique
+    const answers = []
+    for (let question of this.questions) {
+      answers.push({
+        questionId: question.id,
+        questionAnswer:question.answer
+      })
+    }
+    this.questionsProvider.postAnswers(answers).subscribe(res => {
+      console.log(res);
+    }, err => {
+      console.log(err);
+    })
+  }
 
 }

@@ -5,5 +5,6 @@ export const API = {
   Questions: `${SITE_URL}/api/Questions`,
   WalletsTransactions: `${SITE_URL}/api/Wallets/transactions`,
   Wallets: `${SITE_URL}/api/Wallets`,
+  Answers:`${SITE_URL}/api/Questions/api/Questions/Answers`
 
 }
